@@ -12,18 +12,8 @@ module.exports = app => {
         mergeParams: true
     })
 
-    const verifyUserMiddleware = async (req, res, next) => {
-        const token = String(req.headers.authorization || '').split(' ').pop()
-        // TODO 容错，如果token校验不通过
-        const { id } = jwt.verify(token, app.get('secrte'))
-        const user = await AdminUser.findById(id)
-        httpAssert(user, 401, '用户未登录！')
-
-        await next()
-    }
-
     // 获取列表
-    router.get('/', verifyUserMiddleware, async (req, res) => {
+    router.get('/', async (req, res) => {
         const queryOptions = {}
         if (req.Model.modelName === 'Category') {
             queryOptions.populate = 'parent'
@@ -36,14 +26,14 @@ module.exports = app => {
     })
 
     // 新增
-    router.post('/', verifyUserMiddleware, async (req, res) => {
+    router.post('/', async (req, res) => {
         const model = await req.Model.create(req.body)
 
         res.send(model)
     })
 
     // 更新
-    router.put('/:id', verifyUserMiddleware, async (req, res) => {
+    router.put('/:id', async (req, res) => {
         const data = await req.Model.findById(req.params.id)
         // TODO 需要区分接口
         data = req.body
@@ -54,7 +44,7 @@ module.exports = app => {
     })
 
     // 删除
-    router.delete('/:id', verifyUserMiddleware, async (req, res) => {
+    router.delete('/:id', async (req, res) => {
         const data = await req.Model.findById(req.params.id)
         await data.delete()
 
@@ -63,20 +53,33 @@ module.exports = app => {
         })
     })
 
-    app.use('/admin/api/rest/:resource', async (req, res, next) => {
+    const verifyUserMiddleware = async (req, res, next) => {
+        const token = String(req.headers.authorization || '').split(' ').pop()
+        httpAssert(token, 401, 'token 不存在！')
+        const { id } = jwt.verify(token, app.get('secrte'))
+        httpAssert(id, 401, 'token 异常！')
+        const user = await AdminUser.findById(id)
+        httpAssert(user, 401, '用户未登录！')
+
+        await next()
+    }
+
+    const requireModelmiddleware =  async (req, res, next) => {
         // 将动态转递的参数
         const modelName = inflection.classify(req.params.resource)
         // TODO 需要做容错，是否存在该模块
         const Model = require(`../../models/${modelName}`)
         req.Model = Model
         next()
-    }, router)
+    }
+
+    app.use('/admin/api/rest/:resource', verifyUserMiddleware, requireModelmiddleware, router)
 
     // 上传
     const uploadMiddleware = muter({
         dest: path.resolve(__dirname, '../../uploads')
     })
-    app.post('/admin/api/upload', uploadMiddleware.single('file'), async (req, res) => {
+    app.post('/admin/api/upload', verifyUserMiddleware, uploadMiddleware.single('file'), async (req, res) => {
         const file = req.file
         file.url = `http://127.0.0.1:3000/uploads/${file.name}`
         res.send(file)
