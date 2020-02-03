@@ -1,0 +1,199 @@
+@url = http://127.0.0.1:3000/admin/api/rest
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMzgwZTRiZmNlMjUwMmRkMDNjNzRjMCIsImlhdCI6MTU4MDczNDIzNH0.rMZSg9jvgqTtyL88r61-AkkUgaIYELOvTi2Qt__ALoc
+
+// ----------------分类------------
+
+### categories 获取分类列表
+get {{url}}/categories
+Authorization: {{authorization}}
+
+### categories 新建分类
+post {{url}}/categories
+Content-Type: application/json
+
+{
+    "name": "文章"
+}
+
+### categories 更新分类
+put {{url}}/categories/5e378d475524ff183caf3f24
+Content-Type: application/json
+
+{
+    "name": "法师",
+    "parent": "5e37a9f3d773b42f14da6a3d"
+}
+
+### categories 删除分类
+delete {{url}}/categories/5e37ecf6ec24091f9c6d8381
+
+// -------------------物品-------------------------------------------
+
+### items 获取物品列表
+get {{url}}/items
+
+### items 新建物品
+post {{url}}/items
+Content-Type: application/json
+
+{
+    "name": "复活甲",
+    "icon": ""
+}
+
+### items 更新物品
+put {{url}}/items/5e3798967721ba0f5c757bc5
+Content-Type: application/json
+
+{
+    "name": "暴风大剑",
+    "icon": ""
+}
+
+### items 删除物品
+delete {{url}}/items/5e37bc75aa893217fc58a043
+
+// --------------英雄-----------------
+
+### heroes 获取英雄列表
+get {{url}}/heroes
+
+### heroes 新建英雄
+post {{url}}/heroes
+Content-Type: application/json
+
+{
+    "name": "艾希",
+    "avatar": "头像",
+    "title": "寒冰射手",
+    "categories": [
+        "5e37aa35d773b42f14da6a3f"
+    ],
+    "scores": {
+        "difficult": 5,
+        "skills": 4,
+        "attack": 2,
+        "survive": 3
+    },
+    "skills": [
+        {
+            "icon": "技能图标",
+            "name": "技能名",
+            "description": "技能描述",
+            "tips": "技能提示"
+        }
+    ],
+    "items1": [
+        "5e37aa69d773b42f14da6a40"
+    ],
+    "items2": [
+        "5e37bc75aa893217fc58a042"
+    ],
+    "usageTips": "使用提示",
+    "battleTips": "对线技巧",
+    "teamTips": "团队搭配",
+    "partners": [{
+        "hero": "5e37bce5ba76d13b28aaa778",
+        "description": "最佳搭档"
+    }]
+}
+
+### heroes 更新英雄
+put {{url}}/heroes/5e37a875c86bf81a208faef1
+Content-Type: application/json
+
+
+### heroes 删除英雄
+delete {{url}}/heroes/5e37bdcbbbc64c35d862ca2d
+
+// ------------------文章--------------------
+
+### articles 获取文章列表
+get {{url}}/articles
+
+### articles 新建文章
+post {{url}}/articles
+Content-Type: application/json
+
+{
+    "title": "新闻资讯",
+    "categories": ["5e37edaeec24091f9c6d8383"]
+}
+
+### articles 更新文章
+put {{url}}/articles/5e378d475524ff183caf3f24
+Content-Type: application/json
+
+{
+    "title": "新闻资讯",
+    "categories": ["5e37edaeec24091f9c6d8383"]
+}
+
+### articles 删除文章
+delete {{url}}/articles/5e37ed49ec24091f9c6d8382
+
+// ------------------广告-------------------
+
+### ads 获取广告列表
+get {{url}}/ads
+
+### ads 新建广告
+post {{url}}/ads
+Content-Type: application/json
+
+{
+    "name": "首页幻灯片",
+    "items": [
+        {
+            "image": "111",
+            "url": "222"
+        }
+    ]
+}
+
+### ads 更新广告
+put {{url}}/ads/5e378d475524ff183caf3f24
+Content-Type: application/json
+
+
+
+### ads 删除广告
+delete {{url}}/ads/5e37ed49ec24091f9c6d8382
+
+// ------------------管理员账号-------------------
+
+### adminUser 获取管理员账号列表
+get {{url}}/adminUser
+
+### adminUser 新建管理员账号
+post {{url}}/adminUser
+Content-Type: application/json
+
+{
+    "username": "richard",
+    "password": "123456"
+}
+
+### adminUser 更新管理员账号
+put {{url}}/adminUser/5e378d475524ff183caf3f24
+Content-Type: application/json
+
+
+
+### adminUser 删除管理员账号
+delete {{url}}/adminUser/5e37ffa5d823eb26547bc9ac
+
+// ----------------登录----------------------
+
+### 登录
+post http://127.0.0.1:3000/admin/api/login
+Content-Type: application/json
+
+{
+    "username": "richard",
+    "password": "123456"
+}
+
+// ---------------上传文件----------------
+### 上传文件
+post http://127.0.0.1:3000/admin/api/upload
