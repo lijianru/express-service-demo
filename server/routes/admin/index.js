@@ -17,7 +17,7 @@ module.exports = app => {
         // TODO 容错，如果token校验不通过
         const { id } = jwt.verify(token, app.get('secrte'))
         const user = await AdminUser.findById(id)
-        httpAssert(user, 422, '用户未登录！')
+        httpAssert(user, 401, '用户未登录！')
 
         await next()
     }
@@ -95,7 +95,7 @@ module.exports = app => {
 
     // 错误处理
     app.use(async (err, req, res, next) => {
-        res.status(err.statusCode).send({
+        res.status(err.statusCode || 500).send({
             message: err.message
         })
     })
