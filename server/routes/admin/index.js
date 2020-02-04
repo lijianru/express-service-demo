@@ -33,9 +33,8 @@ module.exports = (app) => {
 
   // 更新
   router.put('/:id', async (req, res) => {
-    let data = await req.Model.findById(req.params.id);
-    // TODO 需要区分接口
-    data = req.body;
+    const data = await req.Model.findById(req.params.id);
+    Object.assign(data, req.body);
 
     await data.save();
 

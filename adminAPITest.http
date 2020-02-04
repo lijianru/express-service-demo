@@ -1,5 +1,5 @@
 @url = http://127.0.0.1:3000/admin/api/rest
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMzgwZTRiZmNlMjUwMmRkMDNjNzRjMCIsImlhdCI6MTU4MDczNDIzNH0.rMZSg9jvgqTtyL88r61-AkkUgaIYELOvTi2Qt__ALoc
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMzgwZTRiZmNlMjUwMmRkMDNjNzRjMCIsImlhdCI6MTU4MDgyNjE0NH0.zZ86Yi6DqOdaK3NkNIzzGmlmSTioxT-foHaid1-pIZM
 
 // ----------------分类------------
 
@@ -13,21 +13,20 @@ Authorization: {{authorization}}
 Content-Type: application/json
 
 {
-    "name": "文章"
+    "name": "活动"
 }
 
 ### categories 更新分类
-put {{url}}/categories/5e378d475524ff183caf3f24
+put {{url}}/categories/5e397cc17017430f4ca944c3
 Authorization: {{authorization}}
 Content-Type: application/json
 
 {
-    "name": "法师",
-    "parent": "5e37a9f3d773b42f14da6a3d"
+    "name": "活动1"
 }
 
 ### categories 删除分类
-delete {{url}}/categories/5e3957a61af7800cd49114e7
+delete {{url}}/categories/5e397cb57017430f4ca944c2
 Authorization: {{authorization}}
 
 // -------------------物品-------------------------------------------
