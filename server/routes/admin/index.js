@@ -68,7 +68,12 @@ module.exports = app => {
         // 将动态转递的参数
         const modelName = inflection.classify(req.params.resource)
         // TODO 需要做容错，是否存在该模块
-        const Model = require(`../../models/${modelName}`)
+        let Model
+        try {
+            Model = require(`../../models/${modelName}`)
+        } catch (err) {
+            httpAssert(!err, 404, '接口不存在！')
+        }
         req.Model = Model
         next()
     }

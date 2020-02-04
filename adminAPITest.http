@@ -9,6 +9,7 @@ Authorization: {{authorization}}
 
 ### categories 新建分类
 post {{url}}/categories
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -17,6 +18,7 @@ Content-Type: application/json
 
 ### categories 更新分类
 put {{url}}/categories/5e378d475524ff183caf3f24
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -25,16 +27,19 @@ Content-Type: application/json
 }
 
 ### categories 删除分类
-delete {{url}}/categories/5e37ecf6ec24091f9c6d8381
+delete {{url}}/categories/5e3957a61af7800cd49114e7
+Authorization: {{authorization}}
 
 // -------------------物品-------------------------------------------
 
 ### items 获取物品列表
 get {{url}}/items
+Authorization: {{authorization}}
 
 ### items 新建物品
 post {{url}}/items
 Content-Type: application/json
+Authorization: {{authorization}}
 
 {
     "name": "复活甲",
@@ -43,6 +48,7 @@ Content-Type: application/json
 
 ### items 更新物品
 put {{url}}/items/5e3798967721ba0f5c757bc5
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -52,15 +58,18 @@ Content-Type: application/json
 
 ### items 删除物品
 delete {{url}}/items/5e37bc75aa893217fc58a043
+Authorization: {{authorization}}
 
 // --------------英雄-----------------
 
 ### heroes 获取英雄列表
 get {{url}}/heroes
+Authorization: {{authorization}}
 
 ### heroes 新建英雄
 post {{url}}/heroes
 Content-Type: application/json
+Authorization: {{authorization}}
 
 {
     "name": "艾希",
@@ -100,19 +109,23 @@ Content-Type: application/json
 
 ### heroes 更新英雄
 put {{url}}/heroes/5e37a875c86bf81a208faef1
+Authorization: {{authorization}}
 Content-Type: application/json
 
 
 ### heroes 删除英雄
 delete {{url}}/heroes/5e37bdcbbbc64c35d862ca2d
+Authorization: {{authorization}}
 
 // ------------------文章--------------------
 
 ### articles 获取文章列表
 get {{url}}/articles
+Authorization: {{authorization}}
 
 ### articles 新建文章
 post {{url}}/articles
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -122,6 +135,7 @@ Content-Type: application/json
 
 ### articles 更新文章
 put {{url}}/articles/5e378d475524ff183caf3f24
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -131,14 +145,17 @@ Content-Type: application/json
 
 ### articles 删除文章
 delete {{url}}/articles/5e37ed49ec24091f9c6d8382
+Authorization: {{authorization}}
 
 // ------------------广告-------------------
 
 ### ads 获取广告列表
 get {{url}}/ads
+Authorization: {{authorization}}
 
 ### ads 新建广告
 post {{url}}/ads
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -153,20 +170,24 @@ Content-Type: application/json
 
 ### ads 更新广告
 put {{url}}/ads/5e378d475524ff183caf3f24
+Authorization: {{authorization}}
 Content-Type: application/json
 
 
 
 ### ads 删除广告
 delete {{url}}/ads/5e37ed49ec24091f9c6d8382
+Authorization: {{authorization}}
 
 // ------------------管理员账号-------------------
 
 ### adminUser 获取管理员账号列表
 get {{url}}/adminUser
+Authorization: {{authorization}}
 
 ### adminUser 新建管理员账号
 post {{url}}/adminUser
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -176,17 +197,20 @@ Content-Type: application/json
 
 ### adminUser 更新管理员账号
 put {{url}}/adminUser/5e378d475524ff183caf3f24
+Authorization: {{authorization}}
 Content-Type: application/json
 
 
 
 ### adminUser 删除管理员账号
 delete {{url}}/adminUser/5e37ffa5d823eb26547bc9ac
+Authorization: {{authorization}}
 
 // ----------------登录----------------------
 
 ### 登录
 post http://127.0.0.1:3000/admin/api/login
+Authorization: {{authorization}}
 Content-Type: application/json
 
 {
@@ -197,3 +221,4 @@ Content-Type: application/json
 // ---------------上传文件----------------
 ### 上传文件
 post http://127.0.0.1:3000/admin/api/upload
+Authorization: {{authorization}}
