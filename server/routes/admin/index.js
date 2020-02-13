@@ -86,7 +86,8 @@ module.exports = (app) => {
   // eslint-disable-next-line max-len
   app.post('/admin/api/upload', verifyUserMiddleware, uploadMiddleware.single('file'), async (req, res) => {
     const file = req.file;
-    file.url = `http://127.0.0.1:3000/uploads/${file.name}`;
+    console.log(file);
+    file.url = `http://127.0.0.1:3000/uploads/${file.filename}`;
     res.send(file);
   });
 
