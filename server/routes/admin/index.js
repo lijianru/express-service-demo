@@ -6,7 +6,6 @@ module.exports = (app) => {
   const AdminUser = require('../../models/AdminUser');
   const bcrypc = require('bcrypt');
   const jwt = require('jsonwebtoken');
-  const httpAssert = require('http-assert');
 
   // eslint-disable-next-line new-cap
   const router = express.Router({mergeParams: true});
@@ -53,11 +52,17 @@ module.exports = (app) => {
 
   const verifyUserMiddleware = async (req, res, next) => {
     const token = String(req.headers.authorization || '').split(' ').pop();
-    httpAssert(token, 401, 'token 不存在！');
+    if (!token) {
+      return res.status(401).send({message: 'token 不存在！'});
+    }
     const {id} = jwt.verify(token, app.get('secrte'));
-    httpAssert(id, 401, 'token 异常！');
+    if (!id) {
+      return res.status(401).send({message: 'token 异常！'});
+    }
     const user = await AdminUser.findById(id);
-    httpAssert(user, 401, '用户未登录！');
+    if (!user) {
+      return res.status(401).send({message: '用户未登录！'});
+    }
 
     await next();
   };
@@ -70,7 +75,7 @@ module.exports = (app) => {
     try {
       Model = require(`../../models/${modelName}`);
     } catch (err) {
-      httpAssert(!err, 404, '接口不存在！');
+      return res.status(404).send({message: '接口不存在！'});
     }
     req.Model = Model;
     next();
@@ -95,9 +100,13 @@ module.exports = (app) => {
   app.post('/admin/api/login', async (req, res) => {
     const {username, password} = req.body;
     const user = await AdminUser.findOne({username}).select('+password');
-    httpAssert(user, 422, '用户不存在！');
+    if (!user) {
+      return res.status(422).send({message: '用户不存在！'});
+    }
     const isVliad = bcrypc.compareSync(password, user.password);
-    httpAssert(isVliad, 422, '密码不正确！');
+    if (!isVliad) {
+      return res.status(422).send({message: '密码不正确！'});
+    }
     const token = jwt.sign({id: user._id}, app.get('secrte'));
     res.send({token});
   });
