@@ -86,7 +86,14 @@ module.exports = (app) => {
 
   // 上传
   const uploadMiddleware = muter({
-    dest: path.resolve(__dirname, '../../uploads'),
+    storage: muter.diskStorage({
+      destination: function(req, file, cb) {
+        cb(null, path.resolve(__dirname, '../../uploads'));
+      },
+      filename: function(req, file, cb) {
+        cb(null, file.originalname);
+      },
+    }),
   });
   // eslint-disable-next-line max-len
   app.post('/admin/api/upload', verifyUserMiddleware, uploadMiddleware.single('file'), async (req, res) => {

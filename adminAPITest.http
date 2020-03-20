@@ -1,5 +1,5 @@
 @url = http://127.0.0.1:3000/admin/api/rest
-@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMzgwZTRiZmNlMjUwMmRkMDNjNzRjMCIsImlhdCI6MTU4MDgyNjE0NH0.zZ86Yi6DqOdaK3NkNIzzGmlmSTioxT-foHaid1-pIZM
+@authorization = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlNzM3Y2ZmMjgzODdkMTk5ODY3YTkxYiIsImlhdCI6MTU4NDYyNjk4N30.kAaikuF73E6SM0wnbsxC01cFH9SsXNkiOZN_VscYP1Y
 
 // ----------------分类------------
 
